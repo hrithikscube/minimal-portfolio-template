@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ServiceCard = ({ item, selector }: any) => {
     return (
-        <div className={`lg:w-[500px] w-[300px] h-[300px] lg:h-[500px] bg-[#f2f2f2] flex flex-col p-5 text-black relative gap-5 ${selector}`}>
+        <div className={`lg:w-[500px] w-[300px] h-[300px] lg:h-[500px] flex flex-col p-5 text-black relative gap-5 ${selector}`}>
             <p className='lg:text-6xl text-3xl font-interBold lg:w-[300px]'>{item}</p>
             <p className='lg:text-2xl text-base font-interRegular'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse. Ultrices magna laoreet ornare</p>
             <p className='lg:text-2xl text-base font-interMedium'>Get a quote</p>
@@ -132,12 +132,12 @@ const Home = () => {
             y: 0,
             opacity: 1,
             stagger: 0.1,
-            // scrollTrigger: {
-            //     trigger: '.aboutContainer',
-            //     start: 'center',
-            //     end: '140%',
-            //     scrub: 1,
-            // }
+            scrollTrigger: {
+                trigger: '.aboutContainer',
+                start: 'center',
+                end: '140%',
+                scrub: 1,
+            }
         })
 
         gsap.set('.portfolio', {
@@ -146,7 +146,7 @@ const Home = () => {
         })
 
         gsap.to('.portfolio', {
-            y: 0,   
+            y: 0,
             opacity: 1,
             scrollTrigger: {
                 trigger: '.heroContainer',
@@ -276,10 +276,10 @@ const Home = () => {
                                 <ServiceCard item={item} selector="webdev" />
                             ))
                         } */}
-                        <ServiceCard item={"Web Development"} selector="webdev" />
-                        <ServiceCard item={"Product Design"} selector="prod" />
-                        <ServiceCard item={"Graphic Design"} selector="graphic" />
-                        <ServiceCard item={"Mobile App"} selector="mobapp" />
+                        <ServiceCard item={"Web Development"} selector="webdev bg-[#f2f2f2]" />
+                        <ServiceCard item={"Product Design"} selector="prod bg-[#e2e2e2]" />
+                        <ServiceCard item={"Graphic Design"} selector="graphic bg-[#d9d9d9]" />
+                        <ServiceCard item={"Mobile App"} selector="mobapp bg-[#808080]" />
 
                     </div>
 

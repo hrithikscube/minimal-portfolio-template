@@ -1,6 +1,11 @@
 import React from 'react'
 
 
+// gsap
+import { useEffect } from "react";
+import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
+import { gsap } from "gsap";
+
 const Menu = () => {
     return (
         <div className='w-[24px] h-[24px] cursor-pointer lg:hidden block'>
@@ -38,7 +43,7 @@ const MenuItems = () => {
         <div className='lg:flex hidden items-center gap-10'>
             {
                 menuItems.map(item => (
-                    <p className='cursor-pointer text-lg font-interRegular'>{item.title}</p>
+                    <p className='cursor-pointer text-lg font-interRegular menuItem'>{item.title}</p>
                 ))
             }
         </div>
@@ -51,6 +56,21 @@ const Logo = () => {
 
 
 const Header = () => {
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+        gsap.set('.menuItem', {
+            x: -200,
+            opacity: 0
+        })
+        gsap.to('.menuItem', {
+            x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 1
+        })
+    })
+
     return (
         <div className='lg:p-10 p-5 flex items-center justify-between'>
             <Logo />
