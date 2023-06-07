@@ -23,6 +23,7 @@ import Marquee from "react-fast-marquee";
 import { useEffect } from "react";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap";
+import { useNavigate } from 'react-router-dom'
 
 
 const ServiceCard = ({ item, selector }: any) => {
@@ -35,7 +36,7 @@ const ServiceCard = ({ item, selector }: any) => {
     )
 }
 
-const Title = ({ title, selector }: any) => {
+export const Title = ({ title, selector }: any) => {
     return (
         <div className={`flex justify-center items-center ${selector}`}>
             <p className='lg:text-7xl text-5xl font-interRegular'>{title}</p>
@@ -51,8 +52,8 @@ const Home = () => {
         gsap.set('.heroText', {
             y: 100,
             opacity: 0,
-
         })
+
         gsap.to('.heroText', {
             stagger: 0.1,
             y: 0,
@@ -60,11 +61,11 @@ const Home = () => {
         })
 
         gsap.set(".odd", {
-            x: -100,
+            x: -400,
             opacity: 0,
         })
         gsap.set(".even", {
-            x: 100,
+            x: 400,
             opacity: 0,
         })
 
@@ -79,6 +80,7 @@ const Home = () => {
                 scrub: 4,
             }
         })
+
         gsap.to(".even", {
             x: 0,
             opacity: 1,
@@ -86,6 +88,7 @@ const Home = () => {
             scrollTrigger: {
                 trigger: '.heroContainer',
                 start: '90%',
+                end: '220%',
                 scrub: 4,
             }
         })
@@ -108,19 +111,19 @@ const Home = () => {
         })
 
         gsap.set(".webdev", {
-            x: -200,
+            y: 500,
             opacity: 0,
         })
         gsap.set(".mobapp", {
-            x: 200,
+            y: -500,
             opacity: 0,
         })
         gsap.set(".prod", {
-            y: -200,
+            x: -500,
             opacity: 0,
         })
         gsap.set(".graphic", {
-            y: 200,
+            x: 500,
             opacity: 0,
         })
 
@@ -129,12 +132,12 @@ const Home = () => {
             y: 0,
             opacity: 1,
             stagger: 0.1,
-            scrollTrigger: {
-                trigger: '.aboutContainer',
-                start: 'center',
-                end: '140%',
-                scrub: 1,
-            }
+            // scrollTrigger: {
+            //     trigger: '.aboutContainer',
+            //     start: 'center',
+            //     end: '140%',
+            //     scrub: 1,
+            // }
         })
 
         gsap.set('.portfolio', {
@@ -143,19 +146,49 @@ const Home = () => {
         })
 
         gsap.to('.portfolio', {
-            y: 0,
+            y: 0,   
             opacity: 1,
             scrollTrigger: {
                 trigger: '.heroContainer',
-                start: 'bottom',
+                start: 'center',
+                end: '150%',
                 scrub: 1,
-                markers: true
+            }
+        })
+        gsap.set('.about', {
+            y: -100,
+            opacity: 0
+        })
+
+        gsap.to('.about', {
+            y: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.portfolioContainer',
+                start: 'center',
+                // end: '150%',
+                scrub: 2,
             }
         })
 
+        gsap.set('.services', {
+            y: -100,
+            opacity: 0
+        })
 
+        gsap.to('.services', {
+            y: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.aboutContainer',
+                start: 'center',
+                scrub: 1,
+            }
+        })
 
     }, [])
+
+    const navigate = useNavigate()
 
     return (
         <React.Fragment>
@@ -182,11 +215,12 @@ const Home = () => {
                         <p className='text-center lg:w-[720px] lg:text-4xl text-xl lg:hidden block'>Creative Brand & Identity Design Agency. We Are Imagine Stunning Visual Designs.</p>
                     </div>
                 </div>
+
                 {/* Portfolio */}
                 <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center portfolioContainer'>
                     <Title title="Portfolio" selector={"portfolio"} />
 
-                    <div className='lg:mt-20 mt-10 lg:grid hidden grid-cols-2 justify-center items-center gap-2'>
+                    <div onClick={() => navigate('/projects')} className='cursor-pointer lg:mt-20 mt-10 lg:grid hidden grid-cols-2 justify-center items-center gap-2'>
                         <img className='odd' src={camera} alt="" />
                         <img className='even' src={headphones} alt="" />
                         <img className='odd' src={trimmer} alt="" />
@@ -195,7 +229,7 @@ const Home = () => {
                         <img className='even' src={polaroid} alt="" />
                     </div>
 
-                    <div className='lg:hidden block'>
+                    <div onClick={() => navigate('/projects')} className='lg:hidden block cursor-pointer'>
                         <Marquee>
                             <img className='w-[290px] h-[290px] object-cover ml-5 mt-5' src={camera} alt="" />
                             <img className='w-[290px] h-[290px] object-cover ml-5 mt-5' src={headphones} alt="" />
@@ -209,9 +243,9 @@ const Home = () => {
 
                 {/* About */}
                 <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center aboutContainer'>
-                    <Title title="About" />
+                    <Title title="About" selector="about" />
 
-                    <div className='flex justify-center items-center mt-10'>
+                    <div className='flex justify-center items-center mt-10 about'>
                         <p className='text-center lg:w-[900px] lg:text-2xl text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse. Ultrices magna laoreet ornareLorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse</p>
                     </div>
 
@@ -233,8 +267,8 @@ const Home = () => {
                 </div>
 
                 {/* Services*/}
-                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center'>
-                    <Title title="Services" />
+                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center serviceContainer'>
+                    <Title title="Services" selector="services" />
 
                     <div className='lg:mt-20 mt-10 grid lg:grid-cols-2 grid-cols-1 justify-center items-center lg:gap-2 gap-5'>
                         {/* {
@@ -255,7 +289,7 @@ const Home = () => {
 
                 {/* Contact */}
                 <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center'>
-                    <Title title="Contact" />
+                    <Title title="Contact" selector="contact" />
 
                     <div className='lg:mt-20 mt-10 flex flex-col justify-center items-center'>
                         <p className='lg:text-4xl text-2xl font-interRegular'>contact@gmail.com</p>
