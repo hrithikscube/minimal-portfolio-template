@@ -25,9 +25,9 @@ import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap";
 
 
-const ServiceCard = ({ item }: any) => {
+const ServiceCard = ({ item, selector }: any) => {
     return (
-        <div className='lg:w-[500px] w-[300px] h-[300px] lg:h-[500px] bg-[#f2f2f2] flex flex-col p-5 text-black relative gap-5'>
+        <div className={`lg:w-[500px] w-[300px] h-[300px] lg:h-[500px] bg-[#f2f2f2] flex flex-col p-5 text-black relative gap-5 ${selector}`}>
             <p className='lg:text-6xl text-3xl font-interBold lg:w-[300px]'>{item}</p>
             <p className='lg:text-2xl text-base font-interRegular'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse. Ultrices magna laoreet ornare</p>
             <p className='lg:text-2xl text-base font-interMedium'>Get a quote</p>
@@ -35,9 +35,9 @@ const ServiceCard = ({ item }: any) => {
     )
 }
 
-const Title = ({ title }: any) => {
+const Title = ({ title, selector }: any) => {
     return (
-        <div className='flex justify-center items-center'>
+        <div className={`flex justify-center items-center ${selector}`}>
             <p className='lg:text-7xl text-5xl font-interRegular'>{title}</p>
         </div>
     )
@@ -68,11 +68,89 @@ const Home = () => {
             opacity: 0,
         })
 
-        gsap.to([".odd", ".even"], {
+        gsap.to(".odd", {
             x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.heroContainer',
+                start: '90%',
+                end: '220%',
+                scrub: 4,
+            }
+        })
+        gsap.to(".even", {
+            x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.heroContainer',
+                start: '90%',
+                scrub: 4,
+            }
+        })
+
+        gsap.set(".people", {
+            y: 100,
+            opacity: 0,
+        })
+
+        gsap.to(".people", {
+            y: 0,
             stagger: 0.1,
             opacity: 1,
+            scrollTrigger: {
+                trigger: '.portfolioContainer',
+                start: 'bottom',
+                end: '110%',
+                scrub: 2,
+            }
+        })
 
+        gsap.set(".webdev", {
+            x: -200,
+            opacity: 0,
+        })
+        gsap.set(".mobapp", {
+            x: 200,
+            opacity: 0,
+        })
+        gsap.set(".prod", {
+            y: -200,
+            opacity: 0,
+        })
+        gsap.set(".graphic", {
+            y: 200,
+            opacity: 0,
+        })
+
+        gsap.to([".webdev", ".mobapp", ".prod", ".graphic"], {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.aboutContainer',
+                start: 'center',
+                end: '140%',
+                scrub: 1,
+            }
+        })
+
+        gsap.set('.portfolio', {
+            y: -100,
+            opacity: 0
+        })
+
+        gsap.to('.portfolio', {
+            y: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.heroContainer',
+                start: 'bottom',
+                scrub: 1,
+                markers: true
+            }
         })
 
 
@@ -105,8 +183,8 @@ const Home = () => {
                     </div>
                 </div>
                 {/* Portfolio */}
-                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center'>
-                    <Title title="Portfolio" />
+                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center portfolioContainer'>
+                    <Title title="Portfolio" selector={"portfolio"} />
 
                     <div className='lg:mt-20 mt-10 lg:grid hidden grid-cols-2 justify-center items-center gap-2'>
                         <img className='odd' src={camera} alt="" />
@@ -130,7 +208,7 @@ const Home = () => {
                 </div>
 
                 {/* About */}
-                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center'>
+                <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center aboutContainer'>
                     <Title title="About" />
 
                     <div className='flex justify-center items-center mt-10'>
@@ -138,10 +216,10 @@ const Home = () => {
                     </div>
 
                     <div className='lg:mt-20 mt-10 lg:grid hidden lg:grid-cols-4 grid-cols-2   gap-2 justify-center items-center'>
-                        <img src={guy1} alt="" />
-                        <img src={guy2} alt="" />
-                        <img src={girl1} alt="" />
-                        <img src={guy3} alt="" />
+                        <img className='people' src={guy1} alt="" />
+                        <img className='people' src={guy2} alt="" />
+                        <img className='people' src={girl1} alt="" />
+                        <img className='people' src={guy3} alt="" />
                     </div>
 
                     <div className='lg:hidden block'>
@@ -159,11 +237,16 @@ const Home = () => {
                     <Title title="Services" />
 
                     <div className='lg:mt-20 mt-10 grid lg:grid-cols-2 grid-cols-1 justify-center items-center lg:gap-2 gap-5'>
-                        {
+                        {/* {
                             ["Web Development", "Product Design", "Graphic Design", "Mobile App"].map((item) => (
-                                <ServiceCard item={item} />
+                                <ServiceCard item={item} selector="webdev" />
                             ))
-                        }
+                        } */}
+                        <ServiceCard item={"Web Development"} selector="webdev" />
+                        <ServiceCard item={"Product Design"} selector="prod" />
+                        <ServiceCard item={"Graphic Design"} selector="graphic" />
+                        <ServiceCard item={"Mobile App"} selector="mobapp" />
+
                     </div>
 
 
