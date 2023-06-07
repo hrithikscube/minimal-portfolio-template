@@ -140,19 +140,18 @@ const Home = () => {
             }
         })
 
-        gsap.set('.portfolio', {
-            y: -200,
+        gsap.set('.portfolioT', {
+            x: -200,
             opacity: 0
         })
 
-        gsap.to('.portfolio', {
-            y: 0,
+        gsap.to('.portfolioT', {
+            x: 0,
             opacity: 1,
             scrollTrigger: {
                 trigger: '.heroContainer',
                 start: 'center',
                 scrub: 2,
-                markers: true
             }
         })
         gsap.set('.about', {
@@ -163,6 +162,7 @@ const Home = () => {
         gsap.to('.about', {
             y: 0,
             opacity: 1,
+            stagger: 0.1,
             scrollTrigger: {
                 trigger: '.portfolioContainer',
                 start: 'center',
@@ -218,7 +218,7 @@ const Home = () => {
 
                 {/* Portfolio */}
                 <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center portfolioContainer'>
-                    <Title title="Portfolio" selector={"portfolio"} />
+                    <Title title="Portfolio" selector={"portfolioT"} />
 
                     <div onClick={() => navigate('/projects')} className='cursor-pointer lg:mt-20 mt-10 lg:grid hidden grid-cols-2 justify-center items-center gap-2'>
                         <img className='odd' src={camera} alt="" />
@@ -245,8 +245,8 @@ const Home = () => {
                 <div className='lg:mt-40 mt-20 flex flex-col justify-center items-center aboutContainer'>
                     <Title title="About" selector="about" />
 
-                    <div className='flex justify-center items-center mt-10 about'>
-                        <p className='text-center lg:w-[900px] lg:text-2xl text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse. Ultrices magna laoreet ornareLorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse</p>
+                    <div className='flex justify-center items-center mt-10 '>
+                        <p className='text-center lg:w-[900px] lg:text-2xl text-base about'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse. Ultrices magna laoreet ornareLorem ipsum dolor sit amet, consectetur adipiscing elit. Orci odio amet consectetur volutpat sodales a lectus a. Et gravida tincidunt morbi habitasse</p>
                     </div>
 
                     <div className='lg:mt-20 mt-10 lg:grid hidden lg:grid-cols-4 grid-cols-2   gap-2 justify-center items-center'>
