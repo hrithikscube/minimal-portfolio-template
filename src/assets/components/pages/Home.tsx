@@ -141,7 +141,7 @@ const Home = () => {
         })
 
         gsap.set('.portfolio', {
-            y: -100,
+            y: -200,
             opacity: 0
         })
 
@@ -151,8 +151,8 @@ const Home = () => {
             scrollTrigger: {
                 trigger: '.heroContainer',
                 start: 'center',
-                end: '150%',
-                scrub: 1,
+                scrub: 2,
+                markers: true
             }
         })
         gsap.set('.about', {
